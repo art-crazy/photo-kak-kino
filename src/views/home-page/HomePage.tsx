@@ -1,3 +1,4 @@
+import { homeStructuredData } from "@/shared/config/structuredData";
 import { RevealOnScroll } from "@/shared/ui/reveal-on-scroll";
 import { ContactSection } from "@/widgets/home/contact-section";
 import { HeroSection } from "@/widgets/home/hero-section";
@@ -8,6 +9,12 @@ import { SiteHeader } from "@/widgets/site-header";
 export function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(homeStructuredData),
+        }}
+      />
       <RevealOnScroll />
       <SiteHeader />
       <main id="top">
