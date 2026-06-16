@@ -5,6 +5,9 @@
   --color-muted: #8a8378;
   --color-wine: #722f37;
   --color-line: rgba(43, 42, 40, 0.18);
+  --color-scrollbar-track: #1b1b1a;
+  --color-scrollbar-thumb: #8a8a84;
+  --color-scrollbar-thumb-hover: #b8b8af;
   --content-max-width: 1400px;
   --page-padding: clamp(20px, 4vw, 64px);
 }
