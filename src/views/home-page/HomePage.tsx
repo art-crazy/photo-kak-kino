@@ -1,5 +1,6 @@
 import { faq } from "@/entities/home-content";
 import { createHomeStructuredData } from "@/shared/config/structuredData";
+import { CursorAura } from "@/shared/ui/cursor-aura";
 import { RevealOnScroll } from "@/shared/ui/reveal-on-scroll";
 import { ContactSection } from "@/widgets/home/contact-section";
 import { FaqSection } from "@/widgets/home/faq-section";
@@ -21,6 +22,7 @@ export function HomePage() {
           __html: JSON.stringify(homeStructuredData),
         }}
       />
+      <CursorAura />
       <RevealOnScroll />
       <SiteHeader />
       <main id="top">
