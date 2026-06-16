@@ -4,6 +4,7 @@
   min-height: 520px;
   overflow: hidden;
   align-items: end;
+  padding: clamp(92px, 12vw, 160px) 0;
 }
 
 .background {
