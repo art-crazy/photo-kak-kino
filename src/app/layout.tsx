@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
+import { isSearchIndexingAllowed } from "@/shared/config/searchIndexing";
 import { cx } from "@/shared/lib/cx";
 import "./globals.css";
 
@@ -17,6 +18,15 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: "Ксения Аржанникова — фотограф Санкт-Петербург",
   description: "Сайт фотографа в Санкт-Петербурге.",
+  robots: isSearchIndexingAllowed
+    ? {
+        index: true,
+        follow: true,
+      }
+    : {
+        index: false,
+        follow: false,
+      },
 };
 
 export default function RootLayout({
