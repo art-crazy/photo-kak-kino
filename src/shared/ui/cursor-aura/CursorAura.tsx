@@ -3,36 +3,35 @@
 import { useEffect, useRef } from "react";
 import styles from "./CursorAura.module.css";
 
-type CursorState = {
-  active: boolean;
-  x: number;
-  y: number;
-};
+const smokeColors = [
+  "93, 72, 68",
+  "120, 95, 88",
+  "156, 132, 119",
+  "230, 219, 203",
+];
+const maxParticles = 42;
+const maxPixelRatio = 2;
+const minMoveDistance = 2;
 
-const colors = ["114, 47, 55", "43, 42, 40", "184, 128, 110", "247, 243, 236"];
-const maxParticles = 170;
-
-class CursorShard {
-  private readonly color = colors[Math.floor(Math.random() * colors.length)];
-  private readonly maxLife = Math.random() * 26 + 28;
-  private readonly sides = Math.random() > 0.45 ? 4 : 3;
-  private readonly spin = (Math.random() - 0.5) * 0.22;
+class SmokeParticle {
+  private readonly color =
+    smokeColors[Math.floor(Math.random() * smokeColors.length)];
+  private readonly maxLife = Math.random() * 28 + 34;
   private life = 0;
-  private rotation = Math.random() * Math.PI * 2;
-  private size = Math.random() * 5 + 3;
+  private size = Math.random() * 7 + 7;
   private vx: number;
   private vy: number;
   private x: number;
   private y: number;
 
   constructor(x: number, y: number, dx: number, dy: number) {
-    const angle = Math.atan2(dy, dx) + Math.PI + (Math.random() - 0.5) * 1.7;
-    const speed = Math.random() * 2.1 + 1.1;
+    const angle = Math.atan2(dy, dx) + Math.PI + (Math.random() - 0.5) * 1.2;
+    const speed = Math.random() * 0.55 + 0.25;
 
-    this.x = x + (Math.random() - 0.5) * 10;
-    this.y = y + (Math.random() - 0.5) * 10;
+    this.x = x + (Math.random() - 0.5) * 14;
+    this.y = y + (Math.random() - 0.5) * 14;
     this.vx = Math.cos(angle) * speed;
-    this.vy = Math.sin(angle) * speed + (Math.random() - 0.5) * 0.8;
+    this.vy = Math.sin(angle) * speed - Math.random() * 0.18;
   }
 
   get isDead() {
@@ -41,49 +40,42 @@ class CursorShard {
 
   draw(ctx: CanvasRenderingContext2D) {
     const progress = this.life / this.maxLife;
-    const opacity = Math.max(0, 1 - progress);
+    const opacity = Math.max(0, 1 - progress) * 0.12;
+    const radius = this.size * (1 + progress * 1.35);
+    const gradient = ctx.createRadialGradient(
+      this.x,
+      this.y,
+      0,
+      this.x,
+      this.y,
+      radius,
+    );
 
-    ctx.save();
-    ctx.translate(this.x, this.y);
-    ctx.rotate(this.rotation);
-    ctx.globalAlpha = opacity * 0.78;
-    ctx.fillStyle = `rgb(${this.color})`;
+    gradient.addColorStop(0, `rgba(${this.color}, ${opacity})`);
+    gradient.addColorStop(0.58, `rgba(${this.color}, ${opacity * 0.52})`);
+    gradient.addColorStop(1, `rgba(${this.color}, 0)`);
 
-    if (this.sides === 4) {
-      ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
-    } else {
-      ctx.beginPath();
-      ctx.moveTo(0, -this.size);
-      ctx.lineTo(this.size * 0.9, this.size * 0.7);
-      ctx.lineTo(-this.size * 0.9, this.size * 0.7);
-      ctx.closePath();
-      ctx.fill();
-    }
-
-    ctx.restore();
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, radius, 0, Math.PI * 2);
+    ctx.fill();
   }
 
   update() {
     this.x += this.vx;
     this.y += this.vy;
-    this.vx *= 0.95;
-    this.vy *= 0.95;
-    this.vy += 0.018;
-    this.rotation += this.spin;
-    this.size *= 0.992;
+    this.vx *= 0.982;
+    this.vy *= 0.982;
+    this.vy -= 0.006;
+    this.size *= 1.004;
     this.life += 1;
   }
 }
 
 export function CursorAura() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const cursorRef = useRef<CursorState>({
-    active: false,
-    x: 0,
-    y: 0,
-  });
-  const frameRef = useRef(0);
-  const particlesRef = useRef<CursorShard[]>([]);
+  const frameRef = useRef<number | null>(null);
+  const particlesRef = useRef<SmokeParticle[]>([]);
 
   useEffect(() => {
     const canAnimate = window.matchMedia("(pointer: fine)").matches;
@@ -106,7 +98,7 @@ export function CursorAura() {
     let lastY = window.innerHeight / 2;
 
     const resize = () => {
-      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, maxPixelRatio);
 
       canvas.width = window.innerWidth * pixelRatio;
       canvas.height = window.innerHeight * pixelRatio;
@@ -115,25 +107,44 @@ export function CursorAura() {
       ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
     };
 
+    const animate = () => {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      particlesRef.current = particlesRef.current.filter((particle) => {
+        particle.update();
+        particle.draw(ctx);
+        return !particle.isDead;
+      });
+
+      if (particlesRef.current.length === 0) {
+        frameRef.current = null;
+        return;
+      }
+
+      frameRef.current = window.requestAnimationFrame(animate);
+    };
+
+    const runAnimation = () => {
+      if (frameRef.current === null) {
+        frameRef.current = window.requestAnimationFrame(animate);
+      }
+    };
+
     const move = (event: MouseEvent) => {
       const dx = event.clientX - lastX;
       const dy = event.clientY - lastY;
       const distance = Math.hypot(dx, dy);
 
-      cursorRef.current = {
-        active: true,
-        x: event.clientX,
-        y: event.clientY,
-      };
-
-      if (distance > 2) {
-        const count = Math.min(9, Math.floor(distance / 4) + 2);
+      if (distance > minMoveDistance) {
+        const count = Math.min(2, Math.floor(distance / 22) + 1);
 
         for (let index = 0; index < count; index += 1) {
           particlesRef.current.push(
-            new CursorShard(event.clientX, event.clientY, dx, dy),
+            new SmokeParticle(event.clientX, event.clientY, dx, dy),
           );
         }
+
+        runAnimation();
       }
 
       if (particlesRef.current.length > maxParticles) {
@@ -148,39 +159,19 @@ export function CursorAura() {
     };
 
     const leave = () => {
-      cursorRef.current.active = false;
-    };
-
-    const animate = () => {
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-
-      if (cursorRef.current.active) {
-        ctx.save();
-        ctx.globalAlpha = 0.22;
-        ctx.fillStyle = "rgb(114, 47, 55)";
-        ctx.beginPath();
-        ctx.arc(cursorRef.current.x, cursorRef.current.y, 3.5, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      }
-
-      particlesRef.current = particlesRef.current.filter((particle) => {
-        particle.update();
-        particle.draw(ctx);
-        return !particle.isDead;
-      });
-
-      frameRef.current = window.requestAnimationFrame(animate);
+      particlesRef.current = [];
     };
 
     resize();
     window.addEventListener("resize", resize);
     window.addEventListener("mousemove", move, { passive: true });
     document.addEventListener("mouseleave", leave);
-    frameRef.current = window.requestAnimationFrame(animate);
 
     return () => {
-      window.cancelAnimationFrame(frameRef.current);
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current);
+      }
+
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", move);
       document.removeEventListener("mouseleave", leave);
