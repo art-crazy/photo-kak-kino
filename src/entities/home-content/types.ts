@@ -13,25 +13,11 @@ export type ImageItem = {
   alt: string;
 };
 
-export type WorkItem = ImageItem & {
-  caption: string;
-  aspect: "tall" | "wide" | "portrait";
-};
-
-export type ApproachItem = {
-  title: string;
-  text: string;
-};
-
-export type ReviewItem = {
-  text: string;
-  author: string;
-};
-
 export type HeroContent = {
   label: string;
   title: string;
   text: string;
+  action: ActionLink;
   image: ImageItem;
 };
 

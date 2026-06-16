@@ -21,8 +21,8 @@ export function HeroSection() {
         <SectionLabel className={styles.meta}>{hero.label}</SectionLabel>
         <h1>{hero.title}</h1>
         <p>{hero.text}</p>
-        <Button href="#works" tone="light">
-          Смотреть истории
+        <Button href={hero.action.href} tone="light">
+          {hero.action.label}
         </Button>
         <div className={styles.filmstrip} aria-label="Контактный лист">
           {filmstripImages.map((image) => (

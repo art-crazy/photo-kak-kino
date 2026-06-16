@@ -7,7 +7,7 @@ import styles from "./IntroSection.module.css";
 
 export function IntroSection() {
   return (
-    <section className={styles.section} data-reveal>
+    <section id="story" className={styles.section} data-reveal>
       <Container className={styles.grid}>
         <PhotoFrame
           src={intro.image.src}
