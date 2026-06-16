@@ -14,6 +14,7 @@ export function HeroSection() {
           fill
           priority
           sizes="100vw"
+          quality={88}
           className={styles.backgroundImage}
         />
       </div>
@@ -27,7 +28,14 @@ export function HeroSection() {
         <div className={styles.filmstrip} aria-label="Контактный лист">
           {filmstripImages.map((image) => (
             <div className={styles.frame} key={image.src}>
-              <Image src={image.src} alt={image.alt} fill sizes="130px" className={styles.thumb} />
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                sizes="130px"
+                quality={76}
+                className={styles.thumb}
+              />
             </div>
           ))}
         </div>

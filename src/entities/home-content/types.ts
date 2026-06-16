@@ -36,3 +36,14 @@ export type ContactContent = {
   action: ActionLink;
   image: ImageItem;
 };
+
+export type FaqItem = {
+  question: string;
+  answer: string;
+};
+
+export type FaqContent = {
+  label: string;
+  title: string;
+  items: FaqItem[];
+};

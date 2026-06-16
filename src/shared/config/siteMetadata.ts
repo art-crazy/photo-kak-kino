@@ -1,9 +1,10 @@
 export const siteUrl = "https://photo-kak-kino.ru";
 
-export const siteTitle = "Ксения Аржанникова — фотограф Санкт-Петербург";
+export const siteTitle =
+  "Фотограф в Санкт-Петербурге | Ксения Аржанникова";
 
 export const siteDescription =
-  "Свадебные истории, Love Story и городские портреты в Петербурге.";
+  "Свадебная фотосъемка, Love Story, семейные и портретные фотосессии в Санкт-Петербурге.";
 
 export const siteName = "Ксения Аржанникова";
 
@@ -13,5 +14,5 @@ export const socialImage = {
   url: "/social/photo-kak-kino-og.jpg",
   width: 1200,
   height: 630,
-  alt: "Фотосессия Ксении Аржанниковой в Петербурге",
+  alt: "Фотограф Ксения Аржанникова, фотосессия в Санкт-Петербурге",
 } as const;

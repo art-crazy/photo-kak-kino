@@ -30,6 +30,14 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: siteTitle,
   description: siteDescription,
+  keywords: [
+    "фотограф Санкт-Петербург",
+    "фотосессия в Санкт-Петербурге",
+    "свадебный фотограф Санкт-Петербург",
+    "Love Story Петербург",
+    "семейная фотосессия СПб",
+    "портретная фотосессия Санкт-Петербург",
+  ],
   alternates: {
     canonical: "/",
   },
