@@ -1,0 +1,77 @@
+name: Deploy photo-kak-kino
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE_NAME: ghcr.io/art-crazy/photo-kak-kino:latest
+  APP_DIR: /opt/photo-kak-kino
+  DOMAIN: photo-kak-kino.ru
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Build check
+        run: pnpm build
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ env.IMAGE_NAME }}
+
+      - name: Configure SSH
+        env:
+          SERVER_DEPLOY_SSH_KEY: ${{ secrets.SERVER_DEPLOY_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$SERVER_DEPLOY_SSH_KEY" > ~/.ssh/server_key
+          chmod 600 ~/.ssh/server_key
+          ssh-keyscan -H "${{ secrets.SERVER_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy
+        run: |
+          ssh -i ~/.ssh/server_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} '
+            set -euo pipefail
+            cd /opt/photo-kak-kino
+            docker login ghcr.io -u "${{ github.actor }}" -p "${{ secrets.GITHUB_TOKEN }}"
+            ./deploy.sh
+          '
