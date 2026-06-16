@@ -1,6 +1,7 @@
 {
   "name": "photo-kak-kino",
   "version": "0.1.0",
+  "license": "UNLICENSED",
   "private": true,
   "scripts": {
     "dev": "next dev",
