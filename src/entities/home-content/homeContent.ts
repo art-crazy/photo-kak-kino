@@ -12,9 +12,9 @@ const photo = (fileName: string) => `/site-photos/${fileName}`;
 export const siteName = "Ксения Аржанникова";
 
 export const navLinks: NavLink[] = [
-  { label: "Портфолио", href: "#story" },
-  { label: "Условия съемки", href: "#conditions" },
-  { label: "Контакты", href: "#contact" },
+  { label: "Портфолио", href: "/#story" },
+  { label: "Условия съемки", href: "/#conditions" },
+  { label: "Контакты", href: "/#contact" },
 ];
 
 export const hero: HeroContent = {

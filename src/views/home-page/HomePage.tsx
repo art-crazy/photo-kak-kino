@@ -6,6 +6,7 @@ import { ContactSection } from "@/widgets/home/contact-section";
 import { FaqSection } from "@/widgets/home/faq-section";
 import { HeroSection } from "@/widgets/home/hero-section";
 import { IntroSection } from "@/widgets/home/intro-section";
+import { ServiceLinksSection } from "@/widgets/home/service-links-section";
 import { SiteFooter } from "@/widgets/home/site-footer";
 import { SiteHeader } from "@/widgets/site-header";
 
@@ -28,6 +29,7 @@ export function HomePage() {
       <main id="top">
         <HeroSection />
         <IntroSection />
+        <ServiceLinksSection />
         <FaqSection />
         <ContactSection />
       </main>
