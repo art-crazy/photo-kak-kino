@@ -1,0 +1,37 @@
+.section {
+  padding: clamp(92px, 12vw, 160px) 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.95fr) minmax(280px, 0.75fr);
+  gap: clamp(36px, 6vw, 96px);
+  align-items: end;
+}
+
+.copy {
+  max-width: 460px;
+}
+
+.title {
+  margin-bottom: 28px;
+}
+
+.copy p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.script {
+  margin-top: 18px;
+  color: var(--color-wine);
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 24px;
+  font-style: italic;
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

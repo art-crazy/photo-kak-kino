@@ -1,0 +1,131 @@
+.hero {
+  position: relative;
+  display: grid;
+  min-height: 100vh;
+  overflow: hidden;
+  align-items: end;
+  background: #111;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  animation: zoomOut 9s ease-out forwards;
+}
+
+.background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(114, 47, 55, 0.06);
+  mix-blend-mode: multiply;
+}
+
+.backgroundImage,
+.thumb {
+  object-fit: cover;
+  filter: sepia(0.08) contrast(1.02) saturate(0.94);
+}
+
+.backgroundImage {
+  opacity: 0.74;
+  object-position: center 56%;
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1500px;
+  padding: 120px var(--page-padding) 48px;
+  color: var(--color-milk);
+}
+
+.inner h1 {
+  margin: 0;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(3.2rem, 9vw, 8.5rem);
+  font-weight: 300;
+  line-height: 0.95;
+  white-space: pre-line;
+  letter-spacing: -0.045em;
+}
+
+.inner p {
+  max-width: 520px;
+  margin: 20px 0 34px;
+  color: rgba(247, 243, 236, 0.82);
+}
+
+.meta {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.meta::before {
+  content: "";
+  width: 76px;
+  height: 1px;
+  background: var(--color-wine);
+}
+
+.filmstrip {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  max-width: 780px;
+  margin-top: 24px;
+  padding: 16px;
+  border: 1px solid rgba(247, 243, 236, 0.18);
+  background: rgba(20, 18, 16, 0.55);
+}
+
+.filmstrip::before,
+.filmstrip::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  left: 10px;
+  height: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(247, 243, 236, 0.6) 0 10px,
+    transparent 10px 22px
+  );
+}
+
+.filmstrip::before {
+  top: 4px;
+}
+
+.filmstrip::after {
+  bottom: 4px;
+}
+
+.frame {
+  position: relative;
+  height: 72px;
+  overflow: hidden;
+}
+
+@keyframes zoomOut {
+  from {
+    transform: scale(1.08);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 760px) {
+  .inner {
+    padding-top: 96px;
+  }
+
+  .filmstrip {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

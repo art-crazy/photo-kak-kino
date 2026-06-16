@@ -1,0 +1,21 @@
+.footer {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  padding: 44px var(--page-padding);
+  border-top: 1px solid var(--color-line);
+  color: var(--color-muted);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 760px) {
+  .footer {
+    display: block;
+  }
+
+  .footer div {
+    margin: 12px 0;
+  }
+}

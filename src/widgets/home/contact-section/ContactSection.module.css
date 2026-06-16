@@ -1,0 +1,38 @@
+.section {
+  position: relative;
+  display: flex;
+  min-height: 520px;
+  overflow: hidden;
+  align-items: end;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+}
+
+.image {
+  opacity: 0.74;
+  object-position: center 38%;
+}
+
+.box {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  margin: 0 0 54px var(--page-padding);
+  color: var(--color-milk);
+}
+
+.box p {
+  margin: 20px 0 28px;
+  color: rgba(247, 243, 236, 0.82);
+}
+
+@media (max-width: 760px) {
+  .box {
+    max-width: calc(100% - var(--page-padding) * 2);
+    margin-right: var(--page-padding);
+  }
+}

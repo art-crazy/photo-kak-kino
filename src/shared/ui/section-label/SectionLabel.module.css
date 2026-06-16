@@ -1,0 +1,7 @@
+.label {
+  color: var(--color-wine);
+  font-size: 11px;
+  line-height: 1.3;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}

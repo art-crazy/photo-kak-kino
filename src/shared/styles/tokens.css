@@ -1,0 +1,10 @@
+:root {
+  --color-milk: #f7f3ec;
+  --color-beige: #efe7da;
+  --color-ink: #2b2a28;
+  --color-muted: #8a8378;
+  --color-wine: #722f37;
+  --color-line: rgba(43, 42, 40, 0.18);
+  --content-max-width: 1400px;
+  --page-padding: clamp(20px, 4vw, 64px);
+}

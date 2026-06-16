@@ -1,0 +1,31 @@
+.button {
+  display: none;
+  width: 38px;
+  height: 28px;
+  border: 0;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+}
+
+.button span {
+  display: block;
+  height: 1px;
+  margin: 8px 0;
+  background: currentColor;
+  transition: transform 0.2s ease;
+}
+
+.open span:first-child {
+  transform: translateY(4px) rotate(12deg);
+}
+
+.open span:last-child {
+  transform: translateY(-5px) rotate(-12deg);
+}
+
+@media (max-width: 760px) {
+  .button {
+    display: block;
+  }
+}
