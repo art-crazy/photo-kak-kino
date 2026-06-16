@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { servicePages } from "@/entities/service-content";
+import { getServicePagePath, servicePages } from "@/entities/service-content";
 import { Container } from "@/shared/ui/container";
 import { SectionLabel } from "@/shared/ui/section-label";
 import styles from "./ServiceLinksSection.module.css";
@@ -17,12 +17,16 @@ export function ServiceLinksSection() {
           </p>
         </div>
         <div className={styles.links}>
-          {servicePages.map((page) => (
-            <Link key={page.slug} href={`/${page.slug}`}>
-              <span>{page.title}</span>
-              <small>{page.price}</small>
-            </Link>
-          ))}
+          {servicePages.map((page) => {
+            const path = getServicePagePath(page);
+
+            return (
+              <Link key={path} href={`/${path}`}>
+                <span>{page.title}</span>
+                <small>{page.price}</small>
+              </Link>
+            );
+          })}
         </div>
       </Container>
     </section>

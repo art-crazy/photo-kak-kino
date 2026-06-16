@@ -17,12 +17,13 @@ const commonFaq = {
 
 export const servicePages: ServicePageContent[] = [
   {
-    slug: "svadebnyj-fotograf-spb",
     city: "Санкт-Петербург",
+    citySlug: "sankt-peterburg",
+    serviceSlug: "svadebnyj-fotograf",
     label: "Свадебная фотосъемка",
     title: "Свадебный фотограф в Санкт-Петербурге",
     description:
-      "Свадебный фотограф в СПб: живая фотосъемка полного дня, регистрации, прогулки и камерной свадьбы в Санкт-Петербурге.",
+      "Свадебный фотограф в Санкт-Петербурге: живая фотосъемка полного дня, регистрации, прогулки и камерной свадьбы.",
     lead:
       "Снимаю свадьбы в Санкт-Петербурге спокойно и внимательно: регистрацию, прогулку, семейные объятия, город, свет, ветер и детали дня.",
     image: {
@@ -57,8 +58,42 @@ export const servicePages: ServicePageContent[] = [
     ],
   },
   {
-    slug: "svadebnyj-fotograf-msk",
+    city: "Санкт-Петербург",
+    citySlug: "sankt-peterburg",
+    serviceSlug: "love-story",
+    label: "Love Story",
+    title: "Love Story фотосессия в Санкт-Петербурге",
+    description:
+      "Love Story фотосессия в Санкт-Петербурге: прогулка для пары, живые кадры без напряженной постановки.",
+    lead:
+      "Love Story в Петербурге — это прогулка для двоих: немного города, немного тишины и кадры, в которых важны не позы, а близость.",
+    image: {
+      src: photo("mWJXoKoxQih47_03D4Inf6fHFDx5B5uSrXyoo7_SUxrfR1JGyoJAipOcP51GQDkMjpYmJDhD_0ZH-Y4ArGVBmWwV.jpg"),
+      alt: "Love Story фотосессия пары в Санкт-Петербурге",
+    },
+    serviceType: "Love Story фотосессия в Санкт-Петербурге",
+    price: "от 18 000 ₽",
+    sections: [
+      {
+        title: "Как проходит съемка",
+        text: "Мы выбираем маршрут, идем в удобном темпе, останавливаемся там, где красиво ложится свет, и не превращаем съемку в набор поз.",
+      },
+      {
+        title: "Для чего подходит Love Story",
+        text: "Перед свадьбой, на годовщину, в поездке по Петербургу или просто как личная история пары без повода.",
+      },
+    ],
+    faq: [commonFaq.booking, commonFaq.result],
+    keywords: [
+      "Love Story СПб",
+      "лав стори Санкт-Петербург",
+      "фотосессия пары СПб",
+    ],
+  },
+  {
     city: "Москва",
+    citySlug: "moskva",
+    serviceSlug: "svadebnyj-fotograf",
     label: "Свадебная фотосъемка",
     title: "Свадебный фотограф в Москве",
     description:
@@ -96,94 +131,19 @@ export const servicePages: ServicePageContent[] = [
       "фотограф на свадьбу Москва",
     ],
   },
-  {
-    slug: "love-story-spb",
-    city: "Санкт-Петербург",
-    label: "Love Story",
-    title: "Love Story фотосессия в Санкт-Петербурге",
-    description:
-      "Love Story фотосессия в СПб: прогулка для пары в Санкт-Петербурге, живые кадры без напряженной постановки.",
-    lead:
-      "Love Story в Петербурге — это прогулка для двоих: немного города, немного тишины и кадры, в которых важны не позы, а близость.",
-    image: {
-      src: photo("mWJXoKoxQih47_03D4Inf6fHFDx5B5uSrXyoo7_SUxrfR1JGyoJAipOcP51GQDkMjpYmJDhD_0ZH-Y4ArGVBmWwV.jpg"),
-      alt: "Love Story фотосессия пары в Санкт-Петербурге",
-    },
-    serviceType: "Love Story фотосессия в Санкт-Петербурге",
-    price: "от 18 000 ₽",
-    sections: [
-      {
-        title: "Как проходит съемка",
-        text: "Мы выбираем маршрут, идем в удобном темпе, останавливаемся там, где красиво ложится свет, и не превращаем съемку в набор поз.",
-      },
-      {
-        title: "Для чего подходит Love Story",
-        text: "Перед свадьбой, на годовщину, в поездке по Петербургу или просто как личная история пары без повода.",
-      },
-    ],
-    faq: [commonFaq.booking, commonFaq.result],
-    keywords: ["Love Story СПб", "лав стори Санкт-Петербург", "фотосессия пары СПб"],
-  },
-  {
-    slug: "semejnaya-fotosessiya-spb",
-    city: "Санкт-Петербург",
-    label: "Семейная съемка",
-    title: "Семейная фотосессия в Санкт-Петербурге",
-    description:
-      "Семейная фотосессия в СПб: прогулка, домашняя съемка или студия в Санкт-Петербурге, спокойные живые кадры.",
-    lead:
-      "Семейная съемка строится вокруг людей, а не идеальных поз: дети могут двигаться, взрослые — не изображать чужую картинку.",
-    image: {
-      src: photo("pAXRbf5UAOYSgvx18cRF9o9YCjtvkhQK6thGILy-xqVnlhs6JlAXW2oCiuVUhefq-SGAZGRMy7P9bF2rtRbCzyjT.jpg"),
-      alt: "Семейная фотосессия в Санкт-Петербурге",
-    },
-    serviceType: "Семейная фотосессия в Санкт-Петербурге",
-    price: "от 18 000 ₽",
-    sections: [
-      {
-        title: "Где можно сниматься",
-        text: "На прогулке, дома, в студии, у воды, в любимом районе или в месте, которое уже связано с вашей семьей.",
-      },
-      {
-        title: "Что важно в семейных кадрах",
-        text: "Я оставляю место для движения, пауз, объятий и настоящих реакций, чтобы фотографии не выглядели случайным шаблоном.",
-      },
-    ],
-    faq: [commonFaq.booking, commonFaq.result],
-    keywords: ["семейная фотосессия СПб", "семейный фотограф Санкт-Петербург"],
-  },
-  {
-    slug: "portretnaya-fotosessiya-spb",
-    city: "Санкт-Петербург",
-    label: "Портрет",
-    title: "Портретная фотосессия в Санкт-Петербурге",
-    description:
-      "Портретная фотосессия в СПб: индивидуальная съемка в городе, студии или личной локации в Санкт-Петербурге.",
-    lead:
-      "Портретная съемка помогает сохранить состояние: спокойствие, уверенность, перемены, новую главу или просто хороший день.",
-    image: {
-      src: photo("ZlyChZVYM9lw85cRkOVVbrMIwImOVBju7YEtbuerTdBRS5eth_qWi3yvd8qszlz5B6ea57lbLgm_GRA4ZVDRXHMI.jpg"),
-      alt: "Портретная фотосессия в Санкт-Петербурге",
-    },
-    serviceType: "Портретная фотосессия в Санкт-Петербурге",
-    price: "от 18 000 ₽",
-    sections: [
-      {
-        title: "Для чего подходит портрет",
-        text: "Для себя, личного архива, творческого проекта, сайта, социальных сетей или спокойного обновления визуального образа.",
-      },
-      {
-        title: "Как выбираем стиль",
-        text: "Обсуждаем одежду, локацию, свет и настроение заранее, чтобы съемка была собранной, но не напряженной.",
-      },
-    ],
-    faq: [commonFaq.booking, commonFaq.result],
-    keywords: ["портретная фотосессия СПб", "портретный фотограф Санкт-Петербург"],
-  },
 ];
 
-export const servicePageSlugs = servicePages.map((page) => page.slug);
+export const servicePageParams = servicePages.map((page) => ({
+  citySlug: page.citySlug,
+  serviceSlug: page.serviceSlug,
+}));
 
-export function getServicePage(slug: string) {
-  return servicePages.find((page) => page.slug === slug);
+export function getServicePage(citySlug: string, serviceSlug: string) {
+  return servicePages.find(
+    (page) => page.citySlug === citySlug && page.serviceSlug === serviceSlug,
+  );
+}
+
+export function getServicePagePath(page: ServicePageContent) {
+  return `${page.citySlug}/${page.serviceSlug}`;
 }

@@ -1,5 +1,8 @@
 import Link from "next/link";
-import type { ServicePageContent } from "@/entities/service-content";
+import {
+  getServicePagePath,
+  type ServicePageContent,
+} from "@/entities/service-content";
 import { createServiceStructuredData } from "@/shared/config/structuredData";
 import { Button } from "@/shared/ui/button";
 import { Container } from "@/shared/ui/container";
@@ -20,7 +23,7 @@ export function ServicePage({ page }: ServicePageProps) {
     city: page.city,
     description: page.description,
     faqItems: page.faq,
-    path: page.slug,
+    path: getServicePagePath(page),
     price: page.price,
     serviceType: page.serviceType,
     title: page.title,

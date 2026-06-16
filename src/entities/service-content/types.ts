@@ -4,8 +4,9 @@ export type ServiceFaqItem = {
 };
 
 export type ServicePageContent = {
-  slug: string;
   city: string;
+  citySlug: string;
+  serviceSlug: string;
   label: string;
   title: string;
   description: string;
